@@ -6,7 +6,7 @@ import { addTask, FetchAllTask } from "./api/TaskServices.jsx";
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
-  // get all task
+  // fetch all tasks
   useEffect(() => {
     async function getTasks() {
       const data = await FetchAllTask();
@@ -15,11 +15,10 @@ const App = () => {
     getTasks();
   }, []);
 
-  // task creation 
+  // add task
   const handleAddTask = async (taskData) => {
     try {
-      const newTask = await addTask(taskData);
-      console.log("Recently Updated Task:", newTask);
+      await addTask(taskData);
       const updatedTasks = await FetchAllTask();
       setTasks(updatedTasks);
     } catch (error) {
@@ -28,9 +27,20 @@ const App = () => {
   };
 
   return (
-    <div className="w-11/12 max-w-1/2 mx-auto m-6">
-      <AddTask onTaskAdded={handleAddTask}/>
-      <GetAlltask tasks={tasks} setTasks={setTasks}/>
+    <div className="min-h-screen bg-gray-100 px-4 py-6">
+      <div className="
+        mx-auto
+        w-full
+        max-w-sm
+        sm:max-w-md
+        md:max-w-2xl
+        lg:max-w-3xl
+        xl:max-w-4xl
+        space-y-6
+      ">
+        <AddTask onTaskAdded={handleAddTask} />
+        <GetAlltask tasks={tasks} setTasks={setTasks} />
+      </div>
     </div>
   );
 };

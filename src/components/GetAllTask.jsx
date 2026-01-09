@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DeleteTask, FetchAllTask, UpdateTask } from "../api/TaskServices";
+import toast from "react-hot-toast";
 
 const GetAllTask = ({ tasks, setTasks }) => {
   // State to track which task is being edited
@@ -22,6 +23,7 @@ const GetAllTask = ({ tasks, setTasks }) => {
     const updatedTasks = await FetchAllTask();
     setTasks(updatedTasks);
     setEditTaskId(null);
+    toast.success("Task Edited Succesfully");
   }
 
   // Delete Task Handler
@@ -29,6 +31,7 @@ const GetAllTask = ({ tasks, setTasks }) => {
     await DeleteTask(taskId);
     const updatedTasks = await FetchAllTask();
     setTasks(updatedTasks);
+    toast.success("Task Deleted succesfully");
   }
 
 
@@ -46,8 +49,10 @@ const GetAllTask = ({ tasks, setTasks }) => {
           task._id === taskId ? { ...task, status: newStatus } : task
         )
       );
+      toast.success("Status Updated")
     } catch (error) {
       console.error("Failed to update status:", error);
+      toast.error("Issue in Status Updaton, plz retry!!!");
     }
   }
 
@@ -99,7 +104,7 @@ const GetAllTask = ({ tasks, setTasks }) => {
                     className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-3 rounded-md transition-all duration-300 cursor-pointer"
                     onClick={() => editHandler(task)}
                   >
-                    ✏️ Edit
+                     Edit
                   </button>
 
                   {/* Delete Button */}
@@ -107,7 +112,7 @@ const GetAllTask = ({ tasks, setTasks }) => {
                     className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded-md transition-all duration-300 cursor-pointer"
                     onClick={() => deleteHandler(task._id)}
                   >
-                    ❌ Delete
+                     Delete
                   </button>
 
                   {/* Status Toggle Button */}
@@ -119,7 +124,7 @@ const GetAllTask = ({ tasks, setTasks }) => {
                       }`}
                     onClick={() => StatusHandler(task._id, task.status)}
                   >
-                    {task.status === "Pending" ? "⏳ Pending" : "✅ Completed"}
+                    {task.status === "Pending" ? " Pending" : " Completed"}
                   </button>
                 </div>
               </li>
