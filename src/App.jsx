@@ -28,7 +28,8 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-6">
-      <div className="
+      <div
+        className="
         mx-auto
         w-full
         max-w-sm
@@ -37,7 +38,8 @@ const App = () => {
         lg:max-w-3xl
         xl:max-w-4xl
         space-y-6
-      ">
+      "
+      >
         <AddTask onTaskAdded={handleAddTask} />
         <GetAlltask tasks={tasks} setTasks={setTasks} />
       </div>

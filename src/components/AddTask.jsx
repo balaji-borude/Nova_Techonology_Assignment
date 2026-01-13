@@ -30,6 +30,7 @@ const AddTask = ({ onTaskAdded }) => {
 
   return (
     <div>
+      <h1 className='text-3xl font-mono  w-full text-center p-5 m-5 '> Task Tracker </h1>
       <form onSubmit={submitHandler}>
         <div className='flex flex-col'>
           <label htmlFor='title'>Enter Task Title</label>
